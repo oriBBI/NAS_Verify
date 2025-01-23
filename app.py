@@ -75,28 +75,32 @@ def main():
                         st.subheader(f'{ticker} Financial Data')
                         col1, col2, col3, col4 = st.columns(4)  # 한 행에 4개의 열로 나누기
                         with col1:
-                            st.write('PBR_graph')
-                            fig, ax = plt.subplots(figsize=(60,40))
+                            
+                            fig, ax = plt.subplots(figsize=(6,4))
                             stock.PBR_graph(True, ax=ax)  # PBR 그래프 그리기
                             st.pyplot(fig)  # Streamlit에 그래프 표시
+                            st.write('PBR_graph')
                         
                         with col2:
-                            st.write('ROE_graph')
-                            fig, ax = plt.subplots(figsize=(60,40))
+                            
+                            fig, ax = plt.subplots(figsize=(6,4))
                             stock.ROE_graph(True, ax=ax)  # ROE 그래프 그리기
                             st.pyplot(fig)  # Streamlit에 그래프 표시
+                            st.write('ROE_graph')
                         
                         with col3:
-                            st.write('Revenue_Net_income_graph')
-                            fig, ax = plt.subplots(figsize=(60,40))
+                            
+                            fig, ax = plt.subplots(figsize=(6,4))
                             stock.Revenue_Net_income_graph(True, ax=ax)  # Revenue & Net Income 그래프 그리기
                             st.pyplot(fig)  # Streamlit에 그래프 표시
+                            st.write('Revenue_Net_income_graph')
                         
                         with col4:
-                            st.write('price_52_graph')
-                            fig, ax = plt.subplots(figsize=(60,40))
+                            
+                            fig, ax = plt.subplots(figsize=(6,4))
                             stock.price_52_graph(True, ax=ax)  # Revenue & Net Income 그래프 그리기
                             st.pyplot(fig)  # Streamlit에 그래프 표시
+                            st.write('price_52_graph')
                 else:
                     trash_ticker = pd.DataFrame(ticker, columns=['Symbol'], index = [0])
                     trash = pd.concat([trash, trash_ticker], axis=0, ignore_index=False)
@@ -106,7 +110,10 @@ def main():
                 trash_ticker = pd.DataFrame(ticker, columns=['Symbol'], index = [0])
                 trash = pd.concat([trash, trash_ticker], axis=0, ignore_index=False)
                 trash.to_csv('trash.csv')
-
+            #print(f'{ticker}검증 끝')
+            
+        
 if __name__ == '__main__':
     main()
+
 
