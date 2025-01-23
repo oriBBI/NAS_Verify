@@ -71,6 +71,32 @@ def main():
                     df = pd.DataFrame(result, index=[ticker])
                     valid_tickers = pd.concat([valid_tickers, df], axis = 0,ignore_index=False)
                     st.write(f'{ticker} 검증 성공')
+                    with st.container():  # 각 종목마다 컨테이너를 사용
+                        st.subheader(f'{ticker} Financial Data')
+                        col1, col2, col3, col4 = st.columns(4)  # 한 행에 4개의 열로 나누기
+                        with col1:
+                            st.write('PBR_graph')
+                            fig, ax = plt.subplots(figsize=(60,40))
+                            stock.PBR_graph(True, ax=ax)  # PBR 그래프 그리기
+                            st.pyplot(fig)  # Streamlit에 그래프 표시
+                        
+                        with col2:
+                            st.write('ROE_graph')
+                            fig, ax = plt.subplots(figsize=(60,40))
+                            stock.ROE_graph(True, ax=ax)  # ROE 그래프 그리기
+                            st.pyplot(fig)  # Streamlit에 그래프 표시
+                        
+                        with col3:
+                            st.write('Revenue_Net_income_graph')
+                            fig, ax = plt.subplots(figsize=(60,40))
+                            stock.Revenue_Net_income_graph(True, ax=ax)  # Revenue & Net Income 그래프 그리기
+                            st.pyplot(fig)  # Streamlit에 그래프 표시
+                        
+                        with col4:
+                            st.write('price_52_graph')
+                            fig, ax = plt.subplots(figsize=(60,40))
+                            stock.price_52_graph(True, ax=ax)  # Revenue & Net Income 그래프 그리기
+                            st.pyplot(fig)  # Streamlit에 그래프 표시
                 else:
                     trash_ticker = pd.DataFrame(ticker, columns=['Symbol'], index = [0])
                     trash = pd.concat([trash, trash_ticker], axis=0, ignore_index=False)
@@ -80,47 +106,7 @@ def main():
                 trash_ticker = pd.DataFrame(ticker, columns=['Symbol'], index = [0])
                 trash = pd.concat([trash, trash_ticker], axis=0, ignore_index=False)
                 trash.to_csv('trash.csv')
-            #print(f'{ticker}검증 끝')
-            
-        
-        # 결과 출력
-        if len(valid_tickers)>0:
-            st.write("찾은 종목의 데이터터")
-            st.write(valid_tickers)
-            for ticker in valid_tickers.index:
-                stock = ticker_class[ticker]
-                
-                with st.container():  # 각 종목마다 컨테이너를 사용
-                    st.subheader(f'{ticker} Financial Data')
-                    col1, col2, col3, col4 = st.columns(4)  # 한 행에 4개의 열로 나누기
-                    with col1:
-                        st.write('PBR_graph')
-                        fig, ax = plt.subplots(figsize=(60,40))
-                        stock.PBR_graph(True, ax=ax)  # PBR 그래프 그리기
-                        st.pyplot(fig)  # Streamlit에 그래프 표시
-                    
-                    with col2:
-                        st.write('ROE_graph')
-                        fig, ax = plt.subplots(figsize=(60,40))
-                        stock.ROE_graph(True, ax=ax)  # ROE 그래프 그리기
-                        st.pyplot(fig)  # Streamlit에 그래프 표시
-                    
-                    with col3:
-                        st.write('Revenue_Net_income_graph')
-                        fig, ax = plt.subplots(figsize=(60,40))
-                        stock.Revenue_Net_income_graph(True, ax=ax)  # Revenue & Net Income 그래프 그리기
-                        st.pyplot(fig)  # Streamlit에 그래프 표시
-                    
-                    with col4:
-                        st.write('price_52_graph')
-                        fig, ax = plt.subplots(figsize=(60,40))
-                        stock.price_52_graph(True, ax=ax)  # Revenue & Net Income 그래프 그리기
-                        st.pyplot(fig)  # Streamlit에 그래프 표시
-
-        else:
-            st.write("No valid tickers found.")
 
 if __name__ == '__main__':
     main()
-
 
