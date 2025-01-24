@@ -113,9 +113,10 @@ def main():
                             stock.D_EB_graph(True, ax=ax)  
                             st.pyplot(fig)  
                             st.write('Debt_to_EBITDA_Ratio')
-                        st.write('_______________________________________________')
+                        
                         col1, col2, col3, col4 = st.columns(4) 
                         with col1:
+                            st.write('___________________________'
                             fig, ax = plt.subplots(figsize=(x,y))
                             stock.PBR_graph(True, ax=ax)  
                             st.pyplot(fig)  
