@@ -76,7 +76,7 @@ class stock_invest():
                 matching_date = historical_data.index[historical_data.index.year == date.year][0]
     
             except:
-                matching_date = date
+                matching_date = historical_data.index[historical_data.index.year == date.year]
             
             # PBR 계산
             pbr_value = historical_data['Close'][matching_date] / (shareholder_equity[date])
