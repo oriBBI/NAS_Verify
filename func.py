@@ -73,7 +73,9 @@ class stock_invest():
         for date in shareholder_equity.index:
             try:
                 # 연도별 첫 번째 날짜 가져오기
-                matching_date = historical_data.index[historical_data.index.year == date.year][0]
+                matching_date = historical_data.index[historical_data.index.year == date.year]
+                print(matching_date)
+                matching_date= matching_date[0]
             except:
                 matching_date = date
             
