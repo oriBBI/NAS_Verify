@@ -116,7 +116,6 @@ def main():
                
                         col1, col2, col3, col4 = st.columns(4) 
                         with col1:
-                            st.write('a')
                             fig, ax = plt.subplots(figsize=(x,y))
                             stock.PBR_graph(True, ax=ax)  
                             st.pyplot(fig)  
@@ -143,6 +142,7 @@ def main():
     
                         
             except Exception as e:
+                st.write(type(e), e)
                 print(type(e), e)
             
         
