@@ -88,50 +88,54 @@ def main():
                     ticker_class[ticker] = stock
                     df = pd.DataFrame(result, index=[ticker])
                     valid_tickers = pd.concat([valid_tickers, df], axis = 0,ignore_index=False)
+                    
                     with st.container():  # 각 종목마다 컨테이너를 사용
+                        x,y =(8,6)
                         st.subheader(f'{ticker} Financial Data')
                         col1, col2, col3, col4 = st.columns(4)  # 한 행에 4개의 열로 나누기
                         with col1:
-                            fig, ax = plt.subplots(figsize=(15,10))
+                            fig, ax = plt.subplots(figsize=(x,y))
                             stock.D_E_graph(True, ax=ax)  
                             st.pyplot(fig)  
                             st.write('Debt_to_Equity_Ratio')
                         with col2:
-                            fig, ax = plt.subplots(figsize=(15,10))
+                            fig, ax = plt.subplots(figsize=(x,y))
                             stock.D_A_graph(True, ax=ax)  
                             st.pyplot(fig)  
                             st.write('Debt_to_Asset_Ratio')
                         with col3:
-                            fig, ax = plt.subplots(figsize=(15,10))
+                            fig, ax = plt.subplots(figsize=(x,y))
                             stock.I_C_graph(True, ax=ax)  
                             st.pyplot(fig)  
                             st.write('Interest_Coverage_Ratio')
                         with col4:
-                            fig, ax = plt.subplots(figsize=(15,10))
+                            fig, ax = plt.subplots(figsize=(x,y))
                             stock.D_EB_graph(True, ax=ax)  
                             st.pyplot(fig)  
                             st.write('Debt_to_EBITDA_Ratio')
+
+                        
                         col1, col2, col3, col4 = st.columns(4) 
                         with col1:
-                            fig, ax = plt.subplots(figsize=(15,10))
+                            fig, ax = plt.subplots(figsize=(x,y))
                             stock.PBR_graph(True, ax=ax)  
                             st.pyplot(fig)  
                             st.write('PBR_graph')
 
                         with col2:
-                            fig, ax = plt.subplots(figsize=(15,10))
+                            fig, ax = plt.subplots(figsize=(x,y))
                             stock.ROE_graph(True, ax=ax)  
                             st.pyplot(fig)  
                             st.write('ROE_graph')
                         
                         with col3:
-                            fig, ax = plt.subplots(figsize=(15,10))
+                            fig, ax = plt.subplots(figsize=(x,y))
                             stock.Revenue_Net_income_graph(True, ax=ax)  
                             st.pyplot(fig)  
                             st.write('Revenue_Net_income_graph')
                         
                         with col4:
-                            fig, ax = plt.subplots(figsize=(15,10))
+                            fig, ax = plt.subplots(figsize=(x,y))
                             stock.price_52_graph(True, ax=ax)  
                             st.pyplot(fig)  
                             st.write('price_52_graph')
