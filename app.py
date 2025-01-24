@@ -88,7 +88,6 @@ def main():
                     ticker_class[ticker] = stock
                     df = pd.DataFrame(result, index=[ticker])
                     valid_tickers = pd.concat([valid_tickers, df], axis = 0,ignore_index=False)
-                    st.write(f'{ticker} 검증 성공')
                     with st.container():  # 각 종목마다 컨테이너를 사용
                         st.subheader(f'{ticker} Financial Data')
                         col1, col2, col3, col4 = st.columns(4)  # 한 행에 4개의 열로 나누기
@@ -112,8 +111,6 @@ def main():
                             stock.D_EB_graph(True, ax=ax)  
                             st.pyplot(fig)  
                             st.write('Debt_to_EBITDA_Ratio')
-
-                        
                         col1, col2, col3, col4 = st.columns(4) 
                         with col1:
                             fig, ax = plt.subplots(figsize=(15,10))
