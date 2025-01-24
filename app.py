@@ -14,14 +14,27 @@ def main():
     # 제목
     st.title("나스닥 필터링 도구")
 
+
+    filter_dict = {'ROE':False, 'PBR': False, 'Revenue': False, 'Net_income':False, 'price_52':False, 'D_E':False, 'D_A':False, 'I_C':False, 'D_EB':False }
     # 1행: 필터 조건 버튼
     st.subheader("필터 조건 선택")
 
-    # 열 나누기
-    col1, col2, col3, col4, col5 = st.columns(5)
+    st.subheader("재무 건전성")
+    col1, col2 = st.columns(2)
+    with col1:
+        filter_dict['D_E'] = st.checkbox("부채 비율 100% 미만")
+    with col2:
+        filter_dict['D_A'] = st.checkbox("자산 대비 부채 비율 50% 이하")
 
-    filter_dict = {'ROE':False, 'PBR': False, 'Revenue': False, 'Net_income':False, 'price_52':False}
+    st.subheader("부채 상환 능력")
+    col1, col2 = st.columns(2)
+    with col1:
+        filter_dict['I_C'] = st.checkbox("이자 보상배율 2배 이상")
+    with col2:
+        filter_dict['D_EB'] = st.checkbox("부채/EBITDA 비율 3배 이하")
 
+    st.subheader("성장 능력")
+    col1, col2, col3, col4 = st.columns(4)
     with col1:
         filter_dict['ROE'] = st.checkbox("ROE 증가")
     with col2:
@@ -30,13 +43,18 @@ def main():
         filter_dict['Net_income'] = st.checkbox("순이익 증가")
     with col4:
         filter_dict['Revenue'] = st.checkbox("매출 증가")
-    with col5:
+
+    st.subheader("주가")
+    col1 = st.columns(1)[0]
+    with col1:
         filter_dict['price_52'] = st.checkbox("52주 가격 중간값 이하")
 
+   
+    
     # 2행: 기간 선택
-    st.subheader("기간 선택")
-    period = st.radio("기간을 선택하세요:", ("2y", "5y", "10y", "Max"), horizontal=True)
-    st.write('주식 시간 데이터와 기간이 맞지 않는 경우 자동으로 MAX로 지정합니다.')
+    st.subheader("필터링 기간 선택")
+    period = st.radio("기간을 선택하세요:", ("2y", "5y", "10y", "max"), horizontal=True)
+    st.write('주식 데이터와 기간이 맞지 않는 경우 자동으로 MAX로 지정합니다.')
 
     # 3행: 필터링 시작 버튼
     st.subheader("필터링 시작")
@@ -76,27 +94,52 @@ def main():
                         col1, col2, col3, col4 = st.columns(4)  # 한 행에 4개의 열로 나누기
                         with col1:
                             fig, ax = plt.subplots(figsize=(15,10))
-                            stock.PBR_graph(True, ax=ax)  # PBR 그래프 그리기
-                            st.pyplot(fig)  # Streamlit에 그래프 표시
-                            st.write('PBR_graph')
-                        
+                            stock.D_E_graph(True, ax=ax)  
+                            st.pyplot(fig)  
+                            st.write('Debt_to_Equity_Ratio')
                         with col2:
                             fig, ax = plt.subplots(figsize=(15,10))
-                            stock.ROE_graph(True, ax=ax)  # ROE 그래프 그리기
-                            st.pyplot(fig)  # Streamlit에 그래프 표시
+                            stock.D_A_graph(True, ax=ax)  
+                            st.pyplot(fig)  
+                            st.write('Debt_to_Asset_Ratio')
+                        with col3:
+                            fig, ax = plt.subplots(figsize=(15,10))
+                            stock.I_C_graph(True, ax=ax)  
+                            st.pyplot(fig)  
+                            st.write('Interest_Coverage_Ratio')
+                        with col4:
+                            fig, ax = plt.subplots(figsize=(15,10))
+                            stock.D_EB_graph(True, ax=ax)  
+                            st.pyplot(fig)  
+                            st.write('Debt_to_EBITDA_Ratio')
+
+                        
+                        col1, col2, col3, col4 = st.columns(4) 
+                        with col1:
+                            fig, ax = plt.subplots(figsize=(15,10))
+                            stock.PBR_graph(True, ax=ax)  
+                            st.pyplot(fig)  
+                            st.write('PBR_graph')
+
+                        with col2:
+                            fig, ax = plt.subplots(figsize=(15,10))
+                            stock.ROE_graph(True, ax=ax)  
+                            st.pyplot(fig)  
                             st.write('ROE_graph')
                         
                         with col3:
                             fig, ax = plt.subplots(figsize=(15,10))
-                            stock.Revenue_Net_income_graph(True, ax=ax)  # Revenue & Net Income 그래프 그리기
-                            st.pyplot(fig)  # Streamlit에 그래프 표시
+                            stock.Revenue_Net_income_graph(True, ax=ax)  
+                            st.pyplot(fig)  
                             st.write('Revenue_Net_income_graph')
                         
                         with col4:
                             fig, ax = plt.subplots(figsize=(15,10))
-                            stock.price_52_graph(True, ax=ax)  # Revenue & Net Income 그래프 그리기
-                            st.pyplot(fig)  # Streamlit에 그래프 표시
+                            stock.price_52_graph(True, ax=ax)  
+                            st.pyplot(fig)  
                             st.write('price_52_graph')
+    
+                        
             except Exception as e:
                 A=2
             #print(f'{ticker}검증 끝')
