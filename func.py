@@ -71,8 +71,11 @@ class stock_invest():
        
         pbr=[]
         for date in shareholder_equity.index:
-            # 연도별 첫 번째 날짜 가져오기
-            matching_date = historical_data.index[historical_data.index.year == date.year][0]
+            try:
+                # 연도별 첫 번째 날짜 가져오기
+                matching_date = historical_data.index[historical_data.index.year == date.year][0]
+            except:
+                matching_date = date
             
             # PBR 계산
             pbr_value = historical_data['Close'][matching_date] / (shareholder_equity[date])
