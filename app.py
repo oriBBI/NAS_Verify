@@ -116,7 +116,7 @@ def main():
                         try:
                             col1, col2, col3, col4 = st.columns(4) 
                             with col1:
-                                st.write('___________________________')
+                                
                                 print('asd')
                                 fig, ax = plt.subplots(figsize=(x,y))
                                 stock.PBR_graph(True, ax=ax)  
