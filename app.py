@@ -142,8 +142,7 @@ def main():
     
                         
             except Exception as e:
-                A=2
-            #print(f'{ticker}검증 끝')
+                print(type(e), e)
             
         
 if __name__ == '__main__':
