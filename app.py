@@ -113,35 +113,33 @@ def main():
                             stock.D_EB_graph(True, ax=ax)  
                             st.pyplot(fig)  
                             st.write('Debt_to_EBITDA_Ratio')
-                        try:
-                            col1, col2, col3, col4 = st.columns(4) 
-                            with col1:
-                                
-                                print('asd')
-                                fig, ax = plt.subplots(figsize=(x,y))
-                                stock.PBR_graph(True, ax=ax)  
-                                st.pyplot(fig)  
-                                st.write('PBR_graph')
-    
-                            with col2:
-                                fig, ax = plt.subplots(figsize=(x,y))
-                                stock.ROE_graph(True, ax=ax)  
-                                st.pyplot(fig)  
-                                st.write('ROE_graph')
-                            
-                            with col3:
-                                fig, ax = plt.subplots(figsize=(x,y))
-                                stock.Revenue_Net_income_graph(True, ax=ax)  
-                                st.pyplot(fig)  
-                                st.write('Revenue_Net_income_graph')
-                            
-                            with col4:
-                                fig, ax = plt.subplots(figsize=(x,y))
-                                stock.price_52_graph(True, ax=ax)  
-                                st.pyplot(fig)  
-                                st.write('price_52_graph')
-                        except Exception as e:
-                            print(type(e), e)
+                    with st.container():  # 각 종목마다 컨테이너를 사용
+                        x,y =(8,6)
+                        col1, col2, col3, col4 = st.columns(4) 
+                        with col1:
+                            fig, ax = plt.subplots(figsize=(x,y))
+                            stock.PBR_graph(True, ax=ax)  
+                            st.pyplot(fig)  
+                            st.write('PBR_graph')
+
+                        with col2:
+                            fig, ax = plt.subplots(figsize=(x,y))
+                            stock.ROE_graph(True, ax=ax)  
+                            st.pyplot(fig)  
+                            st.write('ROE_graph')
+                        
+                        with col3:
+                            fig, ax = plt.subplots(figsize=(x,y))
+                            stock.Revenue_Net_income_graph(True, ax=ax)  
+                            st.pyplot(fig)  
+                            st.write('Revenue_Net_income_graph')
+                        
+                        with col4:
+                            fig, ax = plt.subplots(figsize=(x,y))
+                            stock.price_52_graph(True, ax=ax)  
+                            st.pyplot(fig)  
+                            st.write('price_52_graph')
+                    
     
                         
             except Exception as e:
