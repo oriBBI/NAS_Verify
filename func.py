@@ -71,12 +71,15 @@ class stock_invest():
        
         pbr=[]
         for date in shareholder_equity.index:
-            # 연도별 첫 번째 날짜 가져오기
-            matching_date = historical_data.index[historical_data.index.year == date.year][0]
-            
-            # PBR 계산
-            pbr_value = historical_data['Close'][matching_date] / (shareholder_equity[date])
-            pbr.append(pbr_value)
+            try:
+                # 연도별 첫 번째 날짜 가져오기
+                matching_date = historical_data.index[historical_data.index.year == date.year][0]
+                
+                # PBR 계산
+                pbr_value = historical_data['Close'][matching_date] / (shareholder_equity[date])
+                pbr.append(pbr_value)
+            except:
+                pbr.append(None)
         # PBR 시계열로 저장
         self.pbr_series = pd.Series(pbr, index=shareholder_equity.index).dropna()
 
@@ -308,3 +311,18 @@ class stock_invest():
         except Exception as e:
             return False
 
+"""
+ticker = 'AAPL'
+stock = stock_invest(ticker)
+stock.Net_income_verify()
+
+stock.D_E_verify()
+stock.D_A_verify()
+stock.D_EB_verify()
+stock.I_C_verify()
+
+stock.D_E_graph(1)
+stock.D_A_graph(1)
+stock.D_EB_graph(1)
+stock.I_C_graph(1)
+"""
