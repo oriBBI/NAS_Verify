@@ -107,13 +107,14 @@ def main():
                             fig, ax = plt.subplots(figsize=(x,y))
                             stock.I_C_graph(True, ax=ax)  
                             st.pyplot(fig)  
-                            st.write('InterestCoverage_Ratio')
+                            st.write('Interest_Coverage_Ratio')
                         with col4:
                             fig, ax = plt.subplots(figsize=(x,y))
                             stock.D_EB_graph(True, ax=ax)  
                             st.pyplot(fig)  
                             st.write('Debt_to_EBITDA_Ratio')
-               
+
+                        
                         col1, col2, col3, col4 = st.columns(4) 
                         with col1:
                             fig, ax = plt.subplots(figsize=(x,y))
@@ -138,12 +139,11 @@ def main():
                             stock.price_52_graph(True, ax=ax)  
                             st.pyplot(fig)  
                             st.write('price_52_graph')
-                    
     
                         
             except Exception as e:
-                st.write(type(e), e)
-                print(type(e), e)
+                A=2
+            #print(f'{ticker}검증 끝')
             
         
 if __name__ == '__main__':
